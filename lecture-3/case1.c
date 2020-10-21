@@ -11,7 +11,7 @@ typedef enum {
     SUNDAY
 } WeekDay;
 
-void printWeekDay(const WeekDay day) {
+void PrintWeekDay(const WeekDay day) {
     switch (day) {
     case MONDAY:
         puts("Monday");
@@ -44,5 +44,5 @@ int main(void) {
     if (scanf("%d", &n) != 1)
         return EXIT_FAILURE;
 
-    printWeekDay(n);
+    PrintWeekDay(n);
 }

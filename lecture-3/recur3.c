@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-float power_n(const float x, const int n) {
+float PowerN(const float x, const int n) {
     // База рекурсии
     if (n == 0)
         return 1.0;
@@ -9,29 +9,29 @@ float power_n(const float x, const int n) {
     if (n > 0) {
         // Чётные n > 0
         if (n % 2 == 0) {
-            const float r = power_n(x, n / 2);
+            const float r = PowerN(x, n / 2);
             return r * r;
         }
         // Нечётные n > 0
         else {
-            const float r = power_n(x, n - 1);
+            const float r = PowerN(x, n - 1);
             return x * r;
         }
     }
     // n < 0
     else {
-        const float r = power_n(x, -n);
+        const float r = PowerN(x, -n);
         return 1 / r;
     }
 }
 
 int main(void) {
-    printf("%f", power_n(2, 5));
+    printf("%f", PowerN(2, 5));
 
-    // power_n(2, 0)
-    // power_n(2, 1)
-    // power_n(2, 2)
-    // power_n(2, 4)
-    // power_n(2, 5)
+    // PowerN(2, 0)
+    // PowerN(2, 1)
+    // PowerN(2, 2)
+    // PowerN(2, 4)
+    // PowerN(2, 5)
     // main
 }

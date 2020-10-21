@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-int sum_n(const int n, ...) {
+int SumN(const int n, ...) {
     va_list args;
     va_start(args, n);
     int sum = 0;
@@ -13,7 +13,7 @@ int sum_n(const int n, ...) {
     return sum;
 }
 
-int sum_until_zero(const int n, ...) {
+int SumUntilZero(const int n, ...) {
     int sum = 0;
 
     va_list args;
@@ -29,7 +29,7 @@ int sum_until_zero(const int n, ...) {
 }
 
 int main(void) {
-    const int r1 = sum_n(5, 1, -1, 1, -1, 13);
-    const int r2 = sum_until_zero(1, -1, 1, -1, 13, 0);
+    const int r1 = SumN(5, 1, -1, 1, -1, 13);
+    const int r2 = SumUntilZero(1, -1, 1, -1, 13, 0);
     printf("%d %d", r1, r2);
 }
