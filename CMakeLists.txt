@@ -17,3 +17,4 @@ endif()
 
 add_subdirectory(lecture-1)
 add_subdirectory(lecture-2)
+add_subdirectory(lecture-3)
