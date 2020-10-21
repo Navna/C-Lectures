@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 float ArithmeticMean(const float a, const float b) {
     return (a + b) / 2;
@@ -6,10 +7,12 @@ float ArithmeticMean(const float a, const float b) {
 
 int main(void) {
     float a = 0;
-    scanf("%f", &a);
+    if (scanf("%f", &a) != 1)
+        return EXIT_FAILURE;
 
     float b = 0;
-    scanf("%f", &b);
+    if (scanf("%f", &b) != 1)
+        return EXIT_FAILURE;
 
     const float r = ArithmeticMean(a, b);
     printf("%f", r);

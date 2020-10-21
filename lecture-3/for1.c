@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void) {
     int k = 0, n = 0;
-    scanf("%d %d", &k, &n);
+    if (scanf("%d %d", &k, &n) != 2)
+        return EXIT_FAILURE;
 
     for (int i = 0; i < n; ++i) {
         printf("%d\n", k);

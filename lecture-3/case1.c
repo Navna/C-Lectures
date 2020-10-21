@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef enum {
     MONDAY = 1,
@@ -40,7 +41,8 @@ void printWeekDay(const WeekDay day) {
 
 int main(void) {
     int n = 0;
-    scanf("%d", &n);
+    if (scanf("%d", &n) != 1)
+        return EXIT_FAILURE;
 
     printWeekDay(n);
 }

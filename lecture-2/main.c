@@ -7,7 +7,7 @@ int main(void) {
     }
     printf("\n");
 
-    float f1 = 87654321.5;
+    double f1 = 87654321.5;
     printf("%f\n", f1);
     f1 += 1;
     printf("%f\n", f1);
