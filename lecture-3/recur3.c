@@ -1,5 +1,11 @@
 #include <stdio.h>
 
+/// <summary>
+/// Возведение основания в степень.
+/// </summary>
+/// <param name="x">Основание функции.</param>
+/// <param name="n">Степень функции.</param>
+/// <returns>Основание, возведённое в степень.</returns>
 float PowerN(const float x, const int n) {
     // База рекурсии
     if (n == 0)
@@ -26,12 +32,13 @@ float PowerN(const float x, const int n) {
 }
 
 int main(void) {
-    printf("%f", PowerN(2, 5));
+    printf("%f", PowerN(2, -5));
 
     // PowerN(2, 0)
     // PowerN(2, 1)
     // PowerN(2, 2)
     // PowerN(2, 4)
     // PowerN(2, 5)
+    // PowerN(2, -5)
     // main
 }
