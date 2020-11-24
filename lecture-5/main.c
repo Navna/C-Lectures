@@ -17,7 +17,6 @@ char* my_strtok(char* str, const char* delim) {
 
 int main(void) {
     char c = 13;
-    char c = '\t';
 
     // Демонстрация strtok
     const char* srcSentence = "Don't tease! Well, and what has been decided about No - vosiltsev's dispatch? You know everything.";
