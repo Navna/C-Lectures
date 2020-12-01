@@ -1,6 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "io.h"
 
 int main() {
-    printf("%d", sum(1, 2, 3));
+    char* s = read_line();
+
+    puts(s);
+
+    free(s);
 }

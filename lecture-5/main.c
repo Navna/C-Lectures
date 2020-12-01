@@ -13,6 +13,7 @@ char* my_strtok(char* str, const char* delim) {
 
     // TODO
     context = NULL;
+    return NULL;
 }
 
 int main(void) {
