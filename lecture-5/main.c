@@ -11,14 +11,16 @@ char* my_strtok(char* str, const char* delim) {
         return NULL;
     }
 
+    while (*str != 0 && strchr(delim, *str) != NULL)
+        ++str;
+
     // TODO
+
     context = NULL;
     return NULL;
 }
 
 int main(void) {
-    char c = 13;
-
     // Демонстрация strtok
     const char* srcSentence = "Don't tease! Well, and what has been decided about No - vosiltsev's dispatch? You know everything.";
     const char* delimiters = "!, -?";
