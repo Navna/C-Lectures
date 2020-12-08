@@ -3,11 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef size_t vector_get_size_f(void* context);
-typedef int vector_get_item_f(void* context, size_t index);
-typedef void vector_set_item_f(void* context, size_t index, int value);
-typedef void vector_free_f(void* context);
-
 
 
 // =============
@@ -15,7 +10,7 @@ typedef void vector_free_f(void* context);
 // =============
 
 static void* vector_memory_create(const size_t n) {
-    void* const context = calloc(sizeof(size_t) + n * sizeof(n), 1);
+    void* const context = calloc(sizeof(size_t) + n * sizeof(int), 1);
     if (context == NULL)
         return NULL;
     *((size_t*)context) = n;
@@ -86,13 +81,26 @@ static void vector_file_free(void* context) {
 
 struct vector {
     void* context;
-    vector_get_size_f* get_size_f;
-    vector_get_item_f* get_item_f;
-    vector_set_item_f* set_item_f;
-    vector_free_f* free_f;
+    struct vector_handlers* handlers;
 };
 
+struct vector* vector_create_custom(void* context, struct vector_handlers* handlers) {
+    struct vector* v = calloc(1, sizeof(struct vector));
+    if (v == NULL)
+        return NULL;
+    v->context = context;
+    v->handlers = handlers;
+    return v;
+}
+
 struct vector* vector_create_memory(size_t n) {
+    static struct vector_handlers memory_handlers = {
+        vector_memory_get_size,
+        vector_memory_get_item,
+        vector_memory_set_item,
+        vector_memory_free
+    };
+
     struct vector* v = calloc(1, sizeof(struct vector));
     if (v == NULL)
         return NULL;
@@ -102,10 +110,7 @@ struct vector* vector_create_memory(size_t n) {
         free(v);
         return NULL;
     }
-    v->get_size_f = vector_memory_get_size;
-    v->get_item_f = vector_memory_get_item;
-    v->set_item_f = vector_memory_set_item;
-    v->free_f = vector_memory_free;
+    v->handlers = &memory_handlers;
     return v;
 }
 
@@ -123,22 +128,36 @@ struct vector* vector_open_file(const char* path) {
 }
 
 size_t vector_get_size(struct vector* v) {
-    return v->get_size_f(v->context);
+    return v->handlers->get_size_f(v->context);
 }
 
 int vector_get_item(struct vector* v, size_t index) {
-    return v->get_item_f(v->context, index);
+    return v->handlers->get_item_f(v->context, index);
 }
 
 void vector_set_item(struct vector* v, size_t index, int value) {
-    v->set_item_f(v->context, index, value);
+    v->handlers->set_item_f(v->context, index, value);
 }
 
 void vector_free(struct vector* v) {
-    v->free_f(v->context);
+    v->handlers->free_f(v->context);
     v->context = NULL;
-    v->get_size_f = NULL;
-    v->get_item_f = NULL;
-    v->set_item_f = NULL;
-    v->free_f = NULL;
+    v->handlers = NULL;
+    free(v);
+}
+
+void vector_print(struct vector* v) {
+    printf("[");
+
+    if (v != NULL) {
+        const size_t n = vector_get_size(v);
+        for (size_t i = 0; i < n; ++i) {
+            if (i != 0) {
+                printf(", ");
+            }
+            printf("%d", vector_get_item(v, i));
+        }
+    }
+
+    printf("]\n");
 }
