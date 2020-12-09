@@ -7,12 +7,21 @@ struct point {
     int y;
 };
 
-void draw_line(struct image* image, struct color c, struct point p1, struct point p2) {
+void draw_line(struct image* image, const struct color color, const struct point p1, const struct point p2) {
     // TODO
+    (void)image;
+    (void)color;
+    (void)p1;
+    (void)p2;
+
 }
 
-void draw_circle(struct image* image, struct color c, struct point center, int radius) {
+void draw_circle(struct image* image, const struct color color, const struct point center, const int radius) {
     // TODO
+    (void)image;
+    (void)color;
+    (void)center;
+    (void)radius;
 }
 
 int main(void) {

@@ -20,11 +20,11 @@ bool img_save(const char* path, const struct image* image);
 
 void img_free(struct image* image);
 
-size_t img_get_height(struct image* image);
+size_t img_get_height(const struct image* image);
 
-size_t img_get_width(struct image* image);
+size_t img_get_width(const struct image* image);
 
-struct color img_get_pixel(struct image* image, size_t i, size_t j);
+struct color img_get_pixel(const struct image* image, size_t i, size_t j);
 
 void img_set_pixel(struct image* image, size_t i, size_t j, struct color c);
 
