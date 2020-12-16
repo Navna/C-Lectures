@@ -12,8 +12,8 @@ bool save(const char* path, HDC h) {
     if (hbitmap == NULL)
         return false;
 
-    BITMAP bitmap;
-    if (GetObject(hbitmap, sizeof(BITMAP), &bitmap) == 0)
+    BITMAP bitmap = { 0 };
+    if (GetObjectW(hbitmap, sizeof(BITMAP), &bitmap) == 0)
         return false;
 
     const size_t height = (size_t)bitmap.bmHeight;
@@ -26,7 +26,7 @@ bool save(const char* path, HDC h) {
 
     for (size_t i = 0; i < height; ++i) {
         for (size_t j = 0; j < width; ++j) {
-            COLORREF color = GetPixel(h, j, i);
+            COLORREF color = GetPixel(h, (int)j, (int)i);
             struct color c = { GetRValue(color), GetGValue(color), GetBValue(color) };
             img_set_pixel(image, i, j, c);
         }
@@ -70,7 +70,7 @@ void draw(HDC h) {
         COLORREF hprevfgcolor = SetTextColor(h, RGB(0, 0, 255));
 
         const wchar_t* const text = L"Привет!";
-        TextOutW(h, 150, 50, text, _tcslen(text));
+        TextOutW(h, 150, 50, text, (int)_tcslen(text));
 
         SetBkColor(h, hprevbgcolor);
         SetTextColor(h, hprevfgcolor);
